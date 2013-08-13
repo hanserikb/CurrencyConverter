@@ -24,7 +24,8 @@ class Convert extends CI_Controller {
 
     public function index()
     {
-        $this->convert();
+        $this->load->helper('url');
+        $this->load->view('convert/convert');
     }
 
     public function convert()
