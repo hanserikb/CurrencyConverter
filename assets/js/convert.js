@@ -35,21 +35,27 @@
       type: 'POST',
       data: form.serialize(),
       beforeSend: function() {
+
         // Show spinner
         var target = document.getElementById('convert_form');
         spinner.spin(target);
+
       },
       success: function(data) {
+
         console.log(data);
 
+        // Compile template
         var source   = $("#result-dialog-template").html();
         var theTemplate = Handlebars.compile(source);
 
         if (data.success) {
-          // Fetch and compile the template
+
           var compiled = theTemplate(data);
           $('#dialog').html(compiled).dialog("open");
+
         } else {
+
           $('#dialog').html(data.message).dialog("open");
         }
 
