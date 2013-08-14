@@ -22,18 +22,42 @@
                 <form action="/convert/doConvert" id="convert_form">
                 <input type="text" name="amount" class="ui-corner-all">
                 <select name="from" id="from">
-                    <option value="USD">USD</option>
-                    <option value="SEK">SEK</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="DKK">DKK</option>
+                    <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
+                    <option value="HKD">HKD</option>
+                    <option value="MXN">MXN</option>
+                    <option value="NZD">NZD</option>
+                    <option value="PHP">PHP</option>
+                    <option value="SEK">SEK</option>
+                    <option value="SGD">SGD</option>
+                    <option value="THB">THB</option>
+                    <option value="USD">USD</option>
+                    <option value="ZAR">ZAR</option>
                 </select>
                 to
                 <select name="to" id="to">
-                    <option value="USD"></option>
-                    <option value="USD"></option>
-                    <option value="USD"></option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="DKK">DKK</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="HKD">HKD</option>
+                    <option value="MXN">MXN</option>
+                    <option value="NZD">NZD</option>
+                    <option value="PHP">PHP</option>
+                    <option value="SEK">SEK</option>
+                    <option value="SGD">SGD</option>
+                    <option value="THB">THB</option>
+                    <option value="USD">USD</option>
+                    <option value="ZAR">ZAR</option>
                 </select>
 
-                <button type="submit">Send</button>
+                <button type="submit">Convert</button>
 
                 </form>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, officiis, voluptate culpa repellat molestias sit impedit illum fugit. Optio cumque et ducimus doloribus saepe consequatur alias soluta id nemo commodi!</p>
