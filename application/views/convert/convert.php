@@ -9,6 +9,7 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-2.0.3.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-ui-1.10.3.custom.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/handlebars.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/spin.min.js'); ?>"></script>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui-1.10.3.custom.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
