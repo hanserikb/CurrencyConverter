@@ -56,7 +56,6 @@ class Convert extends CI_Controller {
     {
         // Build URL
         $url = "http://currency-api.appspot.com/api/{$this->inputData['from']}/{$this->inputData['to']}.json?key={$this->api_key}&amount={$this->inputData['amount']}";
-
         // Make API call and parse it
         return file_get_contents($url);
     }

@@ -33,11 +33,7 @@
     // Make ajax request
     $.ajax('http://localhost:80/CurrencyConverter/convert/doConvert', {
       type: 'POST',
-      data: {
-        from: "usd",
-        to: "sek",
-        amount: 200
-      },
+      data: form.serialize(),
       beforeSend: function() {
         // Show spinner
         var target = document.getElementById('convert_form');
@@ -51,7 +47,6 @@
 
         if (data.success) {
           // Fetch and compile the template
-          data = { target: "usd", source: "sek", amount: 3000 };
           var compiled = theTemplate(data);
           $('#dialog').html(compiled).dialog("open");
         } else {
