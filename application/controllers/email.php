@@ -8,7 +8,7 @@ class Email extends CI_Controller {
     }
     public function index()
     {
-        $configz = Array(
+        $config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.gmail.com',
             'smtp_port' => 465,
