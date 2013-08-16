@@ -30,7 +30,6 @@ class Email extends MY_Controller {
 
         $this->email->message($this->load->view('email/email', $this->data, true));
 
-
         $this->email->send();
     }
 }

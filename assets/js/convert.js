@@ -21,7 +21,7 @@
 
   // Referencing spinner and the form elements
   var spinner = new Spinner(opts);
-  var form = $('#convert_form');
+  var form = $('#convert-form');
   var dropDowns = form.find('select');
 
   dropDowns.on('change', function() {
@@ -58,13 +58,10 @@
       beforeSend: function() {
 
         // Show spinner
-        var target = document.getElementById('convert_form');
-        spinner.spin(target);
+        showSpinner();
 
       },
       success: function(data) {
-
-        console.log(data);
 
         // Compile template
         var source   = $("#result-dialog-template").html();
@@ -104,19 +101,31 @@
       },
       complete: function() {
         // Remove spinner
-        spinner.stop();
+        hideSpinner();
       }
     });
   });
 
   function sendEmail() {
-    $.post(
-      "http://localhost:80/CurrencyConverter/email",
-      form.serialize() + '&result=' + $('#dialog').find('.resultAmount').text()
-        + "&email=" + $('#dialog').find('input').val(),
-      function(data) {
-        alert('Mail sent!');
-        $(this).dialog('close').html("");
-      });
+    $.ajax("http://localhost:80/CurrencyConverter/email", {
+        data: form.serialize() + '&result=' + $('#dialog').find('.resultAmount').text()
+          + "&email=" + $('#dialog').find('input').val(),
+        beforeSend: showSpinner,
+        success: function(data) {
+          $("#dialog").dialog('close').html("");
+          alert('Mail sent!');
+        },
+        complete: hideSpinner
+    });
+  }
+
+  function showSpinner() {
+    console.log('hi')
+    var target = document.getElementById('convert-form');
+    spinner.spin(target);
+  }
+
+  function hideSpinner() {
+    spinner.stop();
   }
 })(jQuery);
