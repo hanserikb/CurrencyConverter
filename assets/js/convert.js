@@ -48,6 +48,9 @@
     e.preventDefault();
     e.stopPropagation();
 
+    // Reference the input field
+    var inputField = $('form').find('input[type="text"]')[0];
+
     // Make ajax request
     $.ajax('http://localhost:80/CurrencyConverter/convert/doConvert', {
       type: 'POST',
@@ -73,13 +76,14 @@
           $('#dialog').html(compiled).dialog({
             title: 'Conversion complete',
             modal: true,
+            width: "auto",
             buttons: {
               'Email result': function() {
 
               },
               'New conversion': function() {
                 $(this).dialog("close").html("");
-                $('form').find('input[type="text"]')[0].select();
+                inputField.select();
               }
             }
           });
