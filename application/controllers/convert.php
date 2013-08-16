@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Convert extends CI_Controller {
+class Convert extends MY_Controller {
 
     private $api_key = "224cd8f6d9f9c8fb23bfc5a4432f8a91782b87f9";
     private $inputData;
@@ -42,22 +42,18 @@ class Convert extends CI_Controller {
 
     }
 
-    private function getInput()
-    {
-        // Fetch input data
-        $this->inputData = [
-            "from" => $this->input->post('from', TRUE),
-            "to" => $this->input->post('to', TRUE),
-            "amount" => $this->input->post('amount', TRUE)
-        ];
-    }
-
     private function makeRequest()
     {
         // Build URL
-        $url = "http://currency-api.appspot.com/api/{$this->inputData['from']}/{$this->inputData['to']}.json?key={$this->api_key}&amount={$this->inputData['amount']}";
+        $url = "http://currency-api.appspot.com/api/{$this->data['from']}/{$this->data['to']}.json?key={$this->api_key}&amount={$this->data['amount']}";
         // Make API call and parse it
-        return file_get_contents($url);
+        $result = file_get_contents($url);
+
+        // Setting the inputted amount in the array
+        $json = json_decode($result,true);
+        $json['srcAmount'] = $this->data['amount'];
+
+        return json_encode($json);
     }
 }
 

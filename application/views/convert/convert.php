@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
     </head>
     <body>
-        <div id="dialog" title="Convertion Complete"></div>
+        <div id="dialog"></div>
         <div class="container">
             <div class="main">
                 <h1>Currency Converter</h1>
@@ -32,7 +32,7 @@
                     <option value="MXN">MXN</option>
                     <option value="NZD">NZD</option>
                     <option value="PHP">PHP</option>
-                    <option value="SEK">SEK</option>
+                    <option value="SEK" selected>SEK</option>
                     <option value="SGD">SGD</option>
                     <option value="THB">THB</option>
                     <option value="USD">USD</option>
@@ -53,7 +53,7 @@
                     <option value="SEK">SEK</option>
                     <option value="SGD">SGD</option>
                     <option value="THB">THB</option>
-                    <option value="USD">USD</option>
+                    <option value="USD" selected>USD</option>
                     <option value="ZAR">ZAR</option>
                 </select>
 
@@ -67,8 +67,12 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/convert.js'); ?>"></script>
 
         <!-- Handlebars template for the results -->
-        <script id="result-dialog-template" title="hej" type="text/x-handlebars-template">
-          {{amount}}{{source}} = {{target}}
+        <script id="result-dialog-template" type="text/x-handlebars-template">
+          <p><span class="srcAmount">{{srcAmount}}</span> <span class="source">{{source}}</span>
+          = <span class="resultAmount">{{amount}}</span> <span class="target">{{target}}</span></p>
+
+          <p>You can send the result to your e-mail address if you wish!</p>
+          <input type="email" placeholder="Email Address">
         </script>
     </body>
 </html>

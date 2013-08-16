@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Email extends CI_Controller {
+class Email extends MY_Controller {
 
     public function __construct()
     {
@@ -8,12 +8,14 @@ class Email extends CI_Controller {
     }
     public function index()
     {
+
         $config = Array(
+            'mailtype' => 'html',
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.gmail.com',
             'smtp_port' => 465,
-            'smtp_user' => '',
-            'smtp_pass' => ''
+            'smtp_user' => '', // Enter gmail adress
+            'smtp_pass' => '' // Enter gmail password
         );
 
         $this->load->library('email', $config);
@@ -21,9 +23,13 @@ class Email extends CI_Controller {
         $this->email->set_newline("\r\n");
 
         $this->email->from('CurrencyConverter@foobar.com', 'Hans Bentlöv');
-        $this->email->to('hanserikb@gmail.com');
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
+        $this->email->to($this->input->post('email'));
+        $this->email->subject('Conversion made by the CurrencyConverter');
+
+        $this->getInput();
+
+        $this->email->message($this->load->view('email/email', $this->data, true));
+
 
         $this->email->send();
     }
