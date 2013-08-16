@@ -34,3 +34,8 @@ body {
     width: 545px;
     margin: 0 auto;
 }
+
+#dialog {
+    font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+    font-size: 62.5%;
+}
