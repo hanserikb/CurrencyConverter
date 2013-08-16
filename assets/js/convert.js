@@ -1,4 +1,5 @@
 (function($) {
+  // Spinner options
   var opts = {
     lines: 13, // The number of lines to draw
     length: 0, // The length of each line
@@ -18,17 +19,34 @@
     left: 'auto' // Left position relative to parent in px
   };
 
+  // Referencing spinner and the form elements
   var spinner = new Spinner(opts);
+  var form = $('#convert_form');
+  var dropDowns = form.find('select');
 
-  $( "#dialog" ).dialog({ autoOpen: false });
+  dropDowns.on('change', function() {
+    /*
+      When a select element is changed, it checks if the other select element
+      has the same selected index. If it has; it changes the other's index.
 
-  $('#convert_form').on('submit', function(e) {
-    // Stop events
+      This prevents the user from sending the same input in the from/to select-fields.
+     */
+
+    // Get a reference to the other select-element
+    var otherDropDown = $(this).siblings('select')[0];
+
+    // If the other select-element is at its bottom option, go to the top option
+    if (this.selectedIndex === otherDropDown.selectedIndex) {
+      if (otherDropDown.selectedIndex == parseInt(otherDropDown.length)-1) {
+        otherDropDown.selectedIndex = 0;
+      }
+      otherDropDown.selectedIndex = parseInt(otherDropDown.selectedIndex)+1;
+    }
+  });
+  form.on('submit', function(e) {
+    // Stop defaults and event bubbling
     e.preventDefault();
     e.stopPropagation();
-
-    // Reference form
-    var form = $(this);
 
     // Make ajax request
     $.ajax('http://localhost:80/CurrencyConverter/convert/doConvert', {
@@ -52,11 +70,31 @@
         if (data.success) {
 
           var compiled = theTemplate(data);
-          $('#dialog').html(compiled).dialog("open");
+          $('#dialog').html(compiled).dialog({
+            title: 'Conversion complete',
+            modal: true,
+            buttons: {
+              'Email result': function() {
+
+              },
+              'New conversion': function() {
+                $(this).dialog("close").html("");
+                $('form').find('input[type="text"]')[0].select();
+              }
+            }
+          });
 
         } else {
+          $('#dialog').html(data.message).dialog({
+            title: 'An error occured',
+            modal: true,
+            buttons: {
+              'Try again': function() {
+                $(this).dialog('close').html("");
 
-          $('#dialog').html(data.message).dialog("open");
+              }
+            }
+          });
         }
 
       },
@@ -69,5 +107,4 @@
       }
     });
   });
-
 })(jQuery);
