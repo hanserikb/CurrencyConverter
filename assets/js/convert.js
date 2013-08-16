@@ -78,9 +78,7 @@
             modal: true,
             width: "auto",
             buttons: {
-              'Email result': function() {
-
-              },
+              'Email result': sendEmail,
               'New conversion': function() {
                 $(this).dialog("close").html("");
                 inputField.select();
@@ -95,7 +93,6 @@
             buttons: {
               'Try again': function() {
                 $(this).dialog('close').html("");
-
               }
             }
           });
@@ -111,4 +108,15 @@
       }
     });
   });
+
+  function sendEmail() {
+    $.post(
+      "http://localhost:80/CurrencyConverter/email",
+      form.serialize() + '&result=' + $('#dialog').find('.resultAmount').text()
+        + "&email=" + $('#dialog').find('input').val(),
+      function(data) {
+        alert('Mail sent!');
+        $(this).dialog('close').html("");
+      });
+  }
 })(jQuery);
